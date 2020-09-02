@@ -1,8 +1,9 @@
 import * as express from 'express';
 import * as bodyparser from 'body-parser';
 import database from './db';
-import controllerCrush from "../controller/controllerCrush";
-import FuncoesJWT from "./JWT/funcoesJWT";
+import controllerCrush from '../controller/controllerCrush';
+import FuncoesJWT from './JWT/funcoesJWT';
+import {auth} from './middleware/auth';
 
 class App{
     public app: express.Application;
@@ -24,9 +25,14 @@ class App{
     }
 
     routes(){
+        this.app.route('/api/token').get( (req,res)=>
+            this.funcoesJWT.getToken(req, res)
+        );
         this.app.route('/').get( ((req, res) => {
             res.status(200).json({"result" : "Bem vindo ao gerenciamento de crushes"});
         }));
+
+        this.app._router.use(auth);
         this.app.route('/api/crushs').get( (req,res)=>
             this.controllerCrush.select(req, res)
         );
@@ -42,10 +48,6 @@ class App{
         this.app.route('/api/crushs/:id').delete( (req,res)=>
             this.controllerCrush.delete(req, res)
         );
-        this.app.route('/api/token').get( (req,res)=>
-            this.funcoesJWT.getToken(req, res)
-        );
-
     }
 }
 
