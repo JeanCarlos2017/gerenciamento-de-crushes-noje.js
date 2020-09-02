@@ -41,6 +41,20 @@ class Controller {
             .catch(err => res.status(400).json({ 'result': err }));
     }
 
+    //update
+    updateCrush(id, data) {
+        return modelCrush.findOneAndUpdate(id, data);
+    }
+
+    update(req, res) {
+        const id = { _id: req.params.id }
+        const crush = req.body;
+
+        this.updateCrush(id, crush)
+            .then(() => res.status(200).json({ 'result': req.body}))
+            .catch(err => res.status(400).json({ 'result': err }));
+    }
+
 
 
 }

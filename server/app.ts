@@ -34,6 +34,9 @@ class App{
         this.app.route('/api/crushs').post( (req,res)=>
             this.controllerCrush.insert(req, res)
         );
+        this.app.route('/api/crushs/:id').put( (req,res)=>
+            this.controllerCrush.update(req, res)
+        );
 
     }
 }
