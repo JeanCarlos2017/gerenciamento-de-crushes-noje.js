@@ -55,6 +55,19 @@ class Controller {
             .catch(err => res.status(400).json({ 'result': err }));
     }
 
+    //delete
+    deleteByID(id) {
+        return modelCrush.deleteOne(id);
+    }
+
+    delete(req, res) {
+        const id = { _id: req.params.id }
+
+        this.deleteByID(id)
+            .then(crushs => res.status(200).json({ 'result': crushs }))
+            .catch(err => res.status(400).json({ 'result': err }));
+    }
+
 
 
 }

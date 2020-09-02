@@ -37,6 +37,9 @@ class App{
         this.app.route('/api/crushs/:id').put( (req,res)=>
             this.controllerCrush.update(req, res)
         );
+        this.app.route('/api/crushs/:id').delete( (req,res)=>
+            this.controllerCrush.delete(req, res)
+        );
 
     }
 }
