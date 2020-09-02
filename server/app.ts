@@ -2,11 +2,13 @@ import * as express from 'express';
 import * as bodyparser from 'body-parser';
 import database from './db';
 import controllerCrush from "../controller/controllerCrush";
+import FuncoesJWT from "./JWT/funcoesJWT";
 
 class App{
     public app: express.Application;
     private database: database;
     private controllerCrush = new controllerCrush();
+    private funcoesJWT = new FuncoesJWT();
 
     constructor() {
         this.app = express();
@@ -39,6 +41,9 @@ class App{
         );
         this.app.route('/api/crushs/:id').delete( (req,res)=>
             this.controllerCrush.delete(req, res)
+        );
+        this.app.route('/api/token').get( (req,res)=>
+            this.funcoesJWT.getToken(req, res)
         );
 
     }
