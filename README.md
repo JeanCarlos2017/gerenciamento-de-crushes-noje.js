@@ -30,3 +30,10 @@ Utilize o comando
  ````
    npm start
 ````
+
+##Navegador ou Postman
+Abra a seguinte rotaque está especificada no server.ts:
+
+``
+localhost:3000/
+``
